@@ -16,3 +16,60 @@ We can see that 28 is the first triangle number to have over five divisors.
 
 What is the value of the first triangle number to have over five hundred divisors?
 """
+import math
+
+def triangleNumber(n):
+    """
+    Returns the nth triangle number. O(1).
+    """
+    t = (n + 1) * (n / 2)
+    return t if n % 2 == 0 else t + (n / 2) + 1
+
+def numDivisors(n):
+    """
+    Returns the number of divisors of n. O(n)
+    """
+    # add 1 for 1 * n because we only loop to n / 2.
+    ret = len([i for i in range(1, int(math.floor(math.sqrt(n) + 1))) if n % i == 0]) 
+    ret *= 2
+    if n % int(math.sqrt(n)) == 0:
+        ret -= 1
+    return ret
+
+def bisect(l, u, goal):
+    if numDivisors(triangleNumber(l)) == goal:
+        return goal
+    test = (l + u) / 2
+    testRes = numDivisors(triangleNumber(test))
+    print testRes
+    if testRes >= 500:
+        return bisect(l, test, goal)
+    return bisect(test, u, goal)
+
+def firstNumWithDivisors(n):
+    """
+    Returns the first triangle number with n divisors.
+    """
+    upper, lower = 1, 1
+    i = 1
+    # find upper. Assumes strictly increasing numbers of divisors. That might
+    while i < n:
+        print upper
+        print triangleNumber(upper)
+        i = numDivisors(triangleNumber(upper))
+        print i
+        upper *= 2
+    return bisect(lower, upper, n)
+
+def bruteForce(n):
+    i = 1
+    while True:
+        tri = triangleNumber(i)
+        test = numDivisors(tri)
+        print test
+        if test > n:
+            return tri
+        i += 1
+
+if __name__ == "__main__":
+    print "Answer: " + str(bruteForce(500))
