@@ -1,5 +1,7 @@
 """Solve problem 31"""
 
+from datetime import datetime
+
 # for each number of coins from 1 to 200, calculate the total number of
 # combinations that use exactly that number. Use a model of bins and
 # separators. (199 possible separator slots.)
@@ -27,6 +29,7 @@ def CountCombos(subset, summ):
         
 
 def Run():
+    start = datetime.now()
     # legal sized parts
     vals = [1,2, 5, 10, 20, 50, 100, 200]
     # what we're summing to
@@ -38,6 +41,8 @@ def Run():
         subset = [vals[j] for j in range(len(vals))
                 if i >> j & 1]
         ret += CountCombos(subset, total)
+    end = datetime.now()
+    print end - start
     print ret        
 
 
