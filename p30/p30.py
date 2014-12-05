@@ -8,6 +8,7 @@ for i in range(10, 420000):
         tmptotal += (n % 10) ** 5
         n = n / 10
     if tmptotal == i:
+        print i
         total += i
 print total
 
