@@ -1,3 +1,6 @@
+# post solution add-on: solution thread taught me that these are called
+# factorions: http://mathworld.wolfram.com/Factorion.html
+
 import math
 
 facs = [math.factorial(i) for i in range(10)]
