@@ -14,7 +14,6 @@ def run():
     pents = []
     while True:
         n += 1
-        print n
         p_n = (n * (3 * n - 1)) / 2
         for pent in pents:
             if isPent(p_n - pent) and isPent(p_n + pent):
@@ -27,6 +26,6 @@ def run():
 if __name__=='__main__':
     start = time.time()
     out = run()
-    print out
     end = time.time()
+    print out
     print end - start
